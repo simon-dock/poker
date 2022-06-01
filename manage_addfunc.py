@@ -1,3 +1,4 @@
+from cgitb import small
 import random
 
 #ディーラーボタンをランダムで決定する
@@ -5,14 +6,22 @@ def select_dealerbutton(players_number, name_data):
 
     dealer = random.randrange(players_number)
 
-    print("The first dealer button is ",name_data[dealer])
-
     return dealer
 
 #プリフロップの処理を行う
 
-def process_preflop(cip_data, name_data, dealer):
+def process_preflop(cip_data, name_data, player_number, dealer):
 
-    print(cip_data)
+    print("--------------------")
+    print("Now it's Preflop.")
 
-    pass
+    print("The Dealer Button is ",name_data[dealer])
+
+    small_blind = dealer + 1
+    if small_blind == player_number:
+        small_blind = 0
+    print("The Small  Blind  is ",name_data[small_blind])
+    big_blind = small_blind + 1
+    if big_blind == player_number:
+        big_blind = 0
+    print("The Big    Blind  is ",name_data[big_blind])

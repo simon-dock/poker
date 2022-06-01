@@ -87,6 +87,7 @@ def make_game_setting():
 #[5, 1, 0, 0], [j][0]に５　[j][1]に勝者の添字　つまり sbの勝ちだった
 def manage_poker(name_data, small_blind):
 
+    print("--------------------")
     print("GAME START")
 
     players_number = len(name_data)
@@ -100,7 +101,7 @@ def manage_poker(name_data, small_blind):
     while(End_Flag):
 
         #プリフロップ
-        add_mana.process_preflop(cip_data, name_data, dealer)
+        add_mana.process_preflop(cip_data, name_data, players_number, dealer)
 
         #フロップ
         #flop()
