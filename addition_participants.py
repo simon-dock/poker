@@ -1,4 +1,5 @@
-def input_particpants_number():#参加者の人数を入力する
+#参加者の人数を入力する
+def input_players_number():
     Correct_Flag = True
 
     while(Correct_Flag):
@@ -6,11 +7,56 @@ def input_particpants_number():#参加者の人数を入力する
         tmp_box = input()
 
         if tmp_box.isnumeric():
-            participants_number = int(tmp_box)
+            players_number = int(tmp_box)
             Correct_Flag = False
         else:
             print("Please enter the number.")
 
-    print("The number entered is ",participants_number)
+    print("The number entered is ",players_number)
+    print("")
 
-    return participants_number
+    return players_number
+
+#参加者の名前を入力する　左隣の人の名前を入力していく
+def input_players_name(players_number):
+
+    name_data = []
+
+    for i in range(players_number):
+        if i == 0:
+            print("Enter the name of the first person.")
+        else:
+            print("Eenter the name of the person to your left.")
+
+        name = input()
+        name_data.append(name)
+
+    return name_data
+
+#
+def confirm_players(name_data):
+
+    print("Please confirm the name you entered.")
+
+    for i in range(len(name_data)):
+        print(name_data[i])
+    
+    print("Is this correct? y/n")
+
+    Correct_Flag = True
+    Yes_Flag = True
+
+    while(Correct_Flag):
+
+        tmp_box = input()
+
+        if tmp_box == 'y':
+            Correct_Flag = False
+            Yes_Flag = False
+        elif tmp_box == 'n':
+            Correct_Flag = False
+        else:
+            print("Please enter y/n.")
+
+    return Yes_Flag
+

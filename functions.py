@@ -1,6 +1,7 @@
 import addition_participants as ad_par
 
-def display_massege_start():#プログラムの起動メッセージ
+#プログラムの起動メッセージ
+def display_massege_start():
     print("#####################")
     print("")
     print("start Tool of Poker")
@@ -8,29 +9,31 @@ def display_massege_start():#プログラムの起動メッセージ
     print("#####################")
     print("")
 
-def make_participants_data():#参加者のデータリストを作成
+
+#参加者のデータリストを作成する
+def make_players_data():
     
-    print("Set up the participants.")
-    print("Enter the number of participants.")
+    print("Set up the players.")
 
-    participants_number = ad_par.input_particpants_number()
+    Redo_Flag = True
 
-    name_data = []
+    while(Redo_Flag):
 
-    for i in range(participants_number):
-        if i == 0:
-            print("Enter the name of the first person.")
-        else:
-            print("Eenter the name of the person to your left.")
+        print("Enter the number of players.")
+        
+        players_number = ad_par.input_players_number()
 
-        name = input()
-        name_data.append(name)
-    
-    print(name_data)
+        name_data = ad_par.input_players_name(players_number)
+
+        Redo_Flag = ad_par.confirm_players(name_data)
+
+        if Redo_Flag == True:
+            print("Redo the players settings.")
+        
             
 
-def manage_poker():#ポーカーの管理をする
-
+#ポーカーの管理をする
+def manage_poker():
     End_Flag = True
     data = []
     while(End_Flag):
@@ -44,14 +47,14 @@ def manage_poker():#ポーカーの管理をする
 
     print(data)
 
-
-def calculate_result():#戦績を精算
+#戦績を精算
+def calculate_result():
     pass
 
-
-def display_result():#結果を表示する
+#結果を表示する
+def display_result():
     pass
 
-
-def export_reult():#結果をテキストファイルに出力する
+#結果をテキストファイルに出力する
+def export_reult():
     pass

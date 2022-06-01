@@ -2,17 +2,23 @@ import functions as func
 
 def main():
 
-    func.display_massege_start() #プログラム起動のメッセージ
+    #プログラムの起動メッセージ
+    func.display_massege_start() 
 
-    func.make_participants_data() #参加者のデータリストを作成
+    #参加者のデータリストを作成
+    func.make_players_data()
 
-    func.manage_poker()#ポーカーの管理をする
+    #ポーカーの管理をする
+    func.manage_poker()
 
-    # calculate_result() 戦績を精算
+    #戦績を精算
+    # calculate_result()
 
-    # display_result() 結果を表示する
+    #結果を表示する
+    # display_result()
 
-    # export_reult() 結果をテキストファイルに出力する
+    #結果をテキストファイルに出力する
+    # export_reult()
 
 if __name__ == '__main__':
     main()
