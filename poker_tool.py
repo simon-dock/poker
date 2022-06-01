@@ -2,9 +2,9 @@ import functions as func
 
 def main():
 
-    func.display_massege_start()
+    func.display_massege_start() #プログラム起動のメッセージ
 
-    # make_entrant_list() 参加者のデータリストを作成
+    func.make_participants_data() #参加者のデータリストを作成
 
     func.manage_poker()#ポーカーの管理をする
 
