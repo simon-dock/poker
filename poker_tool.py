@@ -9,10 +9,10 @@ def main():
     name_data = funcs.make_players_data()
 
     #ゲームの設定を行う
-    funcs.make_game_setting()
+    small_blind = funcs.make_game_setting()
 
     #ポーカーの管理をする
-    funcs.manage_poker(name_data)
+    funcs.manage_poker(name_data, small_blind)
 
     #戦績を精算
     # calculate_result()

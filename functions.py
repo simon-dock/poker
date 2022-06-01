@@ -66,15 +66,35 @@ def make_game_setting():
             
 
 #ポーカーの管理をする
-def manage_poker(name_data):
+#1 2 0 2 4 4
+#0 2 0 0
+
+#0 1 2 2 2 0
+#2 2 
+def manage_poker(name_data, small_blind):
+
+    print("GAME START")
 
     players_number = len(name_data)
 
     dealer = add_mana.select_dealerbutton(players_number, name_data)
 
     End_Flag = True
+    cip_data = []
     data = []
     while(End_Flag):
+
+        #プリフロップ
+        #pre-flop()
+
+        #フロップ
+        #flop()
+
+        #ターン
+        #turn()
+
+        #リバー
+        #river()
 
         entered_char = input()
         print("The character entered is ",entered_char)
