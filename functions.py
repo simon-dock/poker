@@ -1,4 +1,4 @@
-import addition_participants as ad_par
+import players_addfunc as add_play
 
 #プログラムの起動メッセージ
 def display_massege_start():
@@ -20,12 +20,12 @@ def make_players_data():
     while(Redo_Flag):
 
         print("Enter the number of players.")
-        
-        players_number = ad_par.input_players_number()
 
-        name_data = ad_par.input_players_name(players_number)
+        players_number = add_play.input_players_number()
 
-        Redo_Flag = ad_par.confirm_players(name_data)
+        name_data = add_play.input_players_name(players_number)
+
+        Redo_Flag = add_play.confirm_players(name_data)
 
         if Redo_Flag == True:
             print("Redo the players settings.")
