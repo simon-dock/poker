@@ -1,16 +1,8 @@
+import common_function as com
 #参加者の人数を入力する
 def input_players_number():
-    Correct_Flag = True
 
-    while(Correct_Flag):
-
-        tmp_box = input()
-
-        if tmp_box.isnumeric():
-            players_number = int(tmp_box)
-            Correct_Flag = False
-        else:
-            print("Please enter the number.")
+    players_number = com.enter_data_int()
 
     print("The number entered is ",players_number)
     print("")

@@ -1,3 +1,4 @@
+import common_function as com
 import players_addfunc as add_play
 import manage_addfunc as add_mana
 import numpy as np
@@ -45,23 +46,13 @@ def make_game_setting():
     print("Set up the game.")
     print("Enter the amount for small blind.")
 
-    Correct_Flag = True
+    sb_value = com.enter_data_int()
 
-    while(Correct_Flag):
-
-        tmp_box = input()
-
-        if tmp_box.isnumeric():
-            small_blind = int(tmp_box)
-            Correct_Flag = False
-        else:
-            print("Please enter the number.")
-
-    print("Small blind is ", small_blind)
+    print("Small blind is ", sb_value)
     print("Game setup is finished.")
     print("")
 
-    return small_blind
+    return sb_value
 
         
             
@@ -85,7 +76,7 @@ def make_game_setting():
 #[4, 2, 4, 0],
 #[0, 2, 0, 0],
 #[5, 1, 0, 0], [j][0]に５　[j][1]に勝者の添字　つまり sbの勝ちだった
-def manage_poker(name_data, small_blind):
+def manage_poker(name_data, sb_value):
 
     print("--------------------")
     print("GAME START")
