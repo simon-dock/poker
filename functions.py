@@ -1,3 +1,4 @@
+import addition_participants as ad_par
 
 def display_massege_start():#プログラムの起動メッセージ
     print("#####################")
@@ -7,15 +8,12 @@ def display_massege_start():#プログラムの起動メッセージ
     print("#####################")
     print("")
 
-
 def make_participants_data():#参加者のデータリストを作成
     
     print("Set up the participants.")
     print("Please enter the number of participants.")
 
-    participants_number = int(input())
-    print("The number entered is ",participants_number)
-
+    ad_par.input_particpants_number()
 
 
 def manage_poker():#ポーカーの管理をする
