@@ -21,7 +21,7 @@ def main():
         if entered_char == "q":
             End_Flag = False
 
-    # calculate_result() 戦績を精算する
+    # calculate_result() 戦績を精算
 
     # display_result() 結果を表示する
 
