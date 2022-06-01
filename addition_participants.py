@@ -12,3 +12,5 @@ def input_particpants_number():#参加者の人数を入力する
             print("Please enter the number.")
 
     print("The number entered is ",participants_number)
+
+    return participants_number

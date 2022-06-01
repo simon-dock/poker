@@ -11,10 +11,23 @@ def display_massege_start():#プログラムの起動メッセージ
 def make_participants_data():#参加者のデータリストを作成
     
     print("Set up the participants.")
-    print("Please enter the number of participants.")
+    print("Enter the number of participants.")
 
-    ad_par.input_particpants_number()
+    participants_number = ad_par.input_particpants_number()
 
+    name_data = []
+
+    for i in range(participants_number):
+        if i == 0:
+            print("Enter the name of the first person.")
+        else:
+            print("Eenter the name of the person to your left.")
+
+        name = input()
+        name_data.append(name)
+    
+    print(name_data)
+            
 
 def manage_poker():#ポーカーの管理をする
 
