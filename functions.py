@@ -1,4 +1,6 @@
 import players_addfunc as add_play
+import manage_addfunc as add_mana
+import random
 
 #プログラムの起動メッセージ
 def display_massege_start():
@@ -29,11 +31,47 @@ def make_players_data():
 
         if Redo_Flag == True:
             print("Redo the players settings.")
+
+    print("Players setup is finished.")
+    print("")
+
+    return name_data
+
+
+#ゲームの設定を行う
+def make_game_setting():
+
+    print("Set up the game.")
+    print("Enter the amount for small blind.")
+
+    Correct_Flag = True
+
+    while(Correct_Flag):
+
+        tmp_box = input()
+
+        if tmp_box.isnumeric():
+            small_blind = int(tmp_box)
+            Correct_Flag = False
+        else:
+            print("Please enter the number.")
+
+    print("Small blind is ", small_blind)
+    print("Game setup is finished.")
+    print("")
+
+    return small_blind
+
         
             
 
 #ポーカーの管理をする
-def manage_poker():
+def manage_poker(name_data):
+
+    players_number = len(name_data)
+
+    dealer = add_mana.select_dealerbutton(players_number, name_data)
+
     End_Flag = True
     data = []
     while(End_Flag):
