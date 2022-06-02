@@ -13,3 +13,11 @@ def enter_data_int():
             print("Please enter the number.")
 
     return value_int
+
+def process_next_index(player_number, now_index, cip_index):
+    next_index = now_index + 1
+    if next_index == player_number:
+        cip_index += 1
+        next_index = 0
+
+    return next_index, cip_index

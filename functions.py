@@ -89,10 +89,11 @@ def manage_poker(name_data, sb_value):
     data_limit = 5000
     cip_data = np.zeros([data_limit, players_number+1], dtype=np.int32)
     data = []
+    cip_index = 1
     while(End_Flag):
 
         #プリフロップ
-        add_mana.process_preflop(cip_data, name_data, players_number, dealer)
+        add_mana.process_preflop(cip_index, cip_data, name_data, sb_value, players_number, dealer)
 
         #フロップ
         #flop()

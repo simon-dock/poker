@@ -1,4 +1,6 @@
 import common_function as com
+
+
 #参加者の人数を入力する
 def input_players_number():
 
@@ -25,7 +27,7 @@ def input_players_name(players_number):
 
     return name_data
 
-#
+#参加者の確認
 def confirm_players(name_data):
 
     print("Please confirm the name you entered.")
