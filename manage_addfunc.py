@@ -1,9 +1,14 @@
+from sympy import im
 import common_function as com
 import preflop_addfunc as add_pre
 import process_commons as com_process
+import process_main as main_process
 import random
 import numpy as np
 PREFLOP = 1
+FLOP = 2
+TURN = 3
+RIVER = 4
 
 #ディーラーボタンをランダムで決定する
 def select_dealerbutton(players_number, name_data):
@@ -20,7 +25,11 @@ def process_preflop(cip_data, cip_index, name_data, sb_value, players_number, de
     print("Now it's Preflop.")
     print("")
 
-    now_player, bb_player, cip_data, cip_index = add_pre.set_position(cip_data, cip_index, name_data, sb_value, players_number, dealer)
+    cip_data[cip_index][0] = PREFLOP
+
+    cip_data, cip_index = com.full_not_played(cip_data, cip_index, dealer)
+
+    now_player, sb_player, bb_player, cip_data, cip_index = add_pre.set_position(cip_data, cip_index, name_data, sb_value, players_number, dealer)
     
     #preflop固有の処理
     max_bet = sb_value*2
@@ -32,38 +41,41 @@ def process_preflop(cip_data, cip_index, name_data, sb_value, players_number, de
     Fold_Flag = False
     while(Redo_Flag):
         #前半の処理
-        #フォールドしていなければ
-        #・データの表示
-        #・入力受付、格納
         now_bet = com_process.first_half(Fold_Flag, name_data, cip_data, cip_index, now_player, max_bet, past_bet)
 
         #後半の処理
-        #・場の最大ベット額の更新
-        #・次のプレイヤーの添字を取得
-        #・そのプレイヤーが前ラウンドフォールドしているかチェック
-        #・そのプレイヤーの現在までのベット額を取得
-        #・上の値が場の最大ベット額と同額であれば終了
-        #・プリフロップのbbだけが持つ特殊な処理
-        max_bet = com.update_max_bet(max_bet, now_bet, past_bet)
-        now_player, cip_data, cip_index = com.process_next_index(players_number, now_player, cip_data, cip_index)
-        Fold_Flag = com.check_fold(cip_data, cip_index, now_player)
-        past_bet = com.sum_round_bet(PREFLOP, cip_data, cip_index, now_player)
-        if past_bet == max_bet:
-            Redo_Flag = False
+        Fold_Flag, Redo_Flag, cip_data, cip_index, now_player, max_bet, past_bet = com_process.second_half(PREFLOP, cip_data, cip_index, now_player, players_number, max_bet, now_bet, past_bet)
 
-        if bb_player == now_player and Redo_Flag == False and First_Flag == True:
-            First_Flag = False
-            Redo_Flag = True
+        #preflop独自の処理
+        First_Flag, Redo_Flag = add_pre.check_bb_raise(First_Flag, Redo_Flag, bb_player, now_player)
 
-    if com.cast_cip(now_player) != 1:
-        cip_index += 1
-        new_array = np.zeros([1,com.cast_cip(players_number)], dtype=np.int32)
-        cip_data = np.concatenate([cip_data, new_array])
+    #ラウンド最後の処理
+    cip_data, cip_index = com_process.mark_fold(cip_data, cip_index, players_number, now_player)
     
-    cip_data[cip_index][0] = -1
 
-    for i in range(players_number):
-        preflop_bet = com.sum_round_bet(PREFLOP, cip_data, cip_index, i)
-        if preflop_bet != max_bet:
-            cip_data[cip_index][com.cast_cip(i)] = -1
+    print(cip_data)
 
+    return cip_data, cip_index, sb_player
+
+
+#フロップの処理を行う
+def process_flop(cip_data, cip_index, name_data, players_number, dealer, now_player):
+
+    print("--------------------")
+    print("Now it's Flop.")
+    print("")
+
+    cip_data[cip_index][0] = FLOP
+
+    return main_process.manage(FLOP, cip_data, cip_index, name_data, players_number, dealer, now_player)
+    
+
+
+def process_turn(cip_data, cip_index, name_data, players_number, dealer, now_player):
+    print("--------------------")
+    print("Now it's Turn.")
+    print("")
+
+    cip_data[cip_index][0] = TURN
+
+    return main_process.manage(TURN, cip_data, cip_index, name_data, players_number, dealer, now_player)
