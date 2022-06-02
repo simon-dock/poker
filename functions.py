@@ -93,7 +93,7 @@ def manage_poker(name_data, sb_value):
     while(End_Flag):
 
         #プリフロップ
-        add_mana.process_preflop(cip_index, cip_data, name_data, sb_value, players_number, dealer)
+        add_mana.process_preflop(cip_data, cip_index, name_data, sb_value, players_number, dealer)
 
         #フロップ
         #flop()
