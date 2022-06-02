@@ -46,7 +46,7 @@ def make_game_setting():
     print("Set up the game.")
     print("Enter the amount for small blind.")
 
-    sb_value = com.enter_data_int()
+    sb_value = com.check_data_int()
 
     print("Small blind is ", sb_value)
     print("Game setup is finished.")

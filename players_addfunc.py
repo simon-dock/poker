@@ -4,7 +4,7 @@ import common_function as com
 #参加者の人数を入力する
 def input_players_number():
 
-    players_number = com.enter_data_int()
+    players_number = com.check_data_int()
 
     print("The number entered is ",players_number)
     print("")
