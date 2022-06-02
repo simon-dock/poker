@@ -1,8 +1,7 @@
-from ast import Raise
-from unicodedata import name
 import common_function as com
+import preflop_addfunc as add_pre
 import random
-
+import numpy as np
 PREFLOP = 1
 
 #ディーラーボタンをランダムで決定する
@@ -14,17 +13,19 @@ def select_dealerbutton(players_number, name_data):
 
 #プリフロップの処理を行う
 
-def process_preflop(cip_data, cip_index, name_data, sb_value, player_number, dealer):
+def process_preflop(cip_data, cip_index, name_data, sb_value, players_number, dealer):
 
     print("--------------------")
     print("Now it's Preflop.")
     print("")
 
-    now_player, bb_player, cip_data, cip_index = set_position(cip_data, cip_index, name_data, sb_value, player_number, dealer)
+    now_player, bb_player, cip_data, cip_index = add_pre.set_position(cip_data, cip_index, name_data, sb_value, players_number, dealer)
+    
     max_bet = sb_value*2
+    First_Flag = True
+
     past_bet = 0
     Redo_Flag = True
-    First_Flag = True
     Fold_Flag = False
     while(Redo_Flag):
         #前半の処理
@@ -47,35 +48,25 @@ def process_preflop(cip_data, cip_index, name_data, sb_value, player_number, dea
         #・上の値が場の最大ベット額と同額であれば終了
         #・プリフロップのbbだけが持つ特殊な処理
         max_bet = com.update_max_bet(max_bet, now_bet, past_bet)
-        now_player, cip_index = com.process_next_index(player_number, now_player, cip_index)
+        now_player, cip_data, cip_index = com.process_next_index(players_number, now_player, cip_data, cip_index)
         Fold_Flag = com.check_fold(cip_data, cip_index, now_player)
         past_bet = com.sum_round_bet(PREFLOP, cip_data, cip_index, now_player)
         if past_bet == max_bet:
             Redo_Flag = False
+
         if bb_player == now_player and Redo_Flag == False and First_Flag == True:
             First_Flag = False
             Redo_Flag = True
-    print(name_data)
 
-    for i in range(cip_index+1):
-        print(cip_data[i])
+    if com.cast_cip(now_player) != 1:
+        cip_index += 1
+        new_array = np.zeros([1,com.cast_cip(players_number)], dtype=np.int32)
+        cip_data = np.concatenate([cip_data, new_array])
+    
+    cip_data[cip_index][0] = -1
 
-#ポジションを設定する
-def set_position(cip_data, cip_index, name_data, sb_value, player_number, dealer):
-
-    print("Dealer Button is ",name_data[dealer])
-
-    sb_player, cip_index = com.process_next_index(player_number, dealer, cip_index)
-    print("Small  Blind  is ",name_data[sb_player])
-    cip_data[cip_index][0] = PREFLOP
-    cip_data[cip_index][com.cast_cip(sb_player)] = sb_value
-
-    bb_player, cip_index = com.process_next_index(player_number, sb_player, cip_index)
-    print("Big    Blind  is ",name_data[bb_player])
-    print("")
-    cip_data[cip_index][com.cast_cip(bb_player)] =  sb_value*2
-
-    now_player, cip_index = com.process_next_index(player_number, bb_player, cip_index)
-
-    return now_player, bb_player, cip_data, cip_index 
+    for i in range(players_number):
+        preflop_bet = com.sum_round_bet(PREFLOP, cip_data, cip_index, i)
+        if preflop_bet != max_bet:
+            cip_data[cip_index][com.cast_cip(i)] = -1
 

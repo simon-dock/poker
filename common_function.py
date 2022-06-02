@@ -1,7 +1,9 @@
+import imp
+
+
+import numpy as np
+
 #入力されたデータがint型かチェックする
-from ast import Raise
-
-
 def check_data_int():
     
     Correct_Flag = True
@@ -27,20 +29,23 @@ def update_max_bet(max_bet, now_bet, past_bet):
     return max_bet
 
 #次の添字にアクセスする
-def process_next_index(player_number, now_index, cip_index):
+def process_next_index(players_number, now_index, cip_data, cip_index):
+
     next_index = now_index + 1
-    if next_index == player_number:
+    if next_index == players_number:
         cip_index += 1
+        new_array = np.zeros([1,cast_cip(players_number)], dtype=np.int32)
+        cip_data = np.concatenate([cip_data, new_array])
         next_index = 0
 
-    return next_index, cip_index
+    return next_index, cip_data, cip_index
 
 #cip_dataの第二引数に入れるために変換する
 def cast_cip(index):
     index += 1
     return index
 
-#現在のラウンドの掛け金を求める
+#now_playerの現在のラウンドまでの掛け金を求める
 def sum_round_bet(round_name, cip_data, cip_index, now_player):
 
     begin_index = cip_index   
@@ -64,6 +69,8 @@ def check_fold(cip_data, cip_index, now_player):
     if cip_data[cip_index][0] == 0:
         if cip_data[cip_index-1][cast_cip(now_player)] == 0:
             Fold_Flag = True
+    #elif cip_data[cip_index][0] != 1:
+
     
     
     return Fold_Flag

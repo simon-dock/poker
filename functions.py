@@ -86,10 +86,9 @@ def manage_poker(name_data, sb_value):
     dealer = add_mana.select_dealerbutton(players_number, name_data)
 
     End_Flag = True
-    data_limit = 5000
-    cip_data = np.zeros([data_limit, players_number+1], dtype=np.int32)
+    cip_data = np.zeros([1,com.cast_cip(players_number)], dtype=np.int32)
     data = []
-    cip_index = 1
+    cip_index = 0
     while(End_Flag):
 
         #プリフロップ
