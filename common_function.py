@@ -70,7 +70,5 @@ def check_fold(cip_data, cip_index, now_player):
         if cip_data[cip_index-1][cast_cip(now_player)] == 0:
             Fold_Flag = True
     #elif cip_data[cip_index][0] != 1:
-
-    
     
     return Fold_Flag

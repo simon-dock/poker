@@ -1,5 +1,6 @@
 import common_function as com
 import preflop_addfunc as add_pre
+import process_commons as com_process
 import random
 import numpy as np
 PREFLOP = 1
@@ -11,8 +12,8 @@ def select_dealerbutton(players_number, name_data):
 
     return dealer
 
-#プリフロップの処理を行う
 
+#プリフロップの処理を行う
 def process_preflop(cip_data, cip_index, name_data, sb_value, players_number, dealer):
 
     print("--------------------")
@@ -21,9 +22,11 @@ def process_preflop(cip_data, cip_index, name_data, sb_value, players_number, de
 
     now_player, bb_player, cip_data, cip_index = add_pre.set_position(cip_data, cip_index, name_data, sb_value, players_number, dealer)
     
+    #preflop固有の処理
     max_bet = sb_value*2
     First_Flag = True
 
+    #共通の処理
     past_bet = 0
     Redo_Flag = True
     Fold_Flag = False
@@ -32,13 +35,7 @@ def process_preflop(cip_data, cip_index, name_data, sb_value, players_number, de
         #フォールドしていなければ
         #・データの表示
         #・入力受付、格納
-        if Fold_Flag == False:
-            print("Now    Player is ",name_data[now_player])
-            print("You are betting $",past_bet)
-            print("Max bet is $",max_bet)
-
-            now_bet = com.check_data_int()
-            cip_data[cip_index][com.cast_cip(now_player)] = now_bet
+        now_bet = com_process.first_half(Fold_Flag, name_data, cip_data, cip_index, now_player, max_bet, past_bet)
 
         #後半の処理
         #・場の最大ベット額の更新
