@@ -31,16 +31,16 @@ def check_bb_raise(First_Flag, Redo_Flag, cip_data, cip_index, players_number, b
 
 
 def check_survive(Redo_Flag, cip_data, cip_index, players_number, now_player):
-
+   
     fold_count = 0
 
     while(1):
         
         now_player -= 1
         if now_player == -1:
-            now_player = players_number
+            now_player = players_number-1
             cip_index -= 1
-            
+
         if cip_data[cip_index][com.cast_cip(now_player)] == -1:
             fold_count += 1
         else:

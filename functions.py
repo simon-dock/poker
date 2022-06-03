@@ -82,9 +82,6 @@ def manage_poker(name_data, sb_value):
     players_number = len(name_data)
 
     dealer = add_mana.select_dealerbutton(players_number, name_data)
-
-    dealer = 0
-
     End_Flag = True
     cip_data = np.zeros([1,com.cast_cip(players_number)], dtype=np.int32)
     fold_count = 0
@@ -117,14 +114,14 @@ def manage_poker(name_data, sb_value):
             #最後まで降りなかった人が勝つ処理
             cip_data, cip_index = add_mana.process_survive(cip_data, cip_index, name_data, players_number)
         
-        entered_char = input()
-        print("The character entered is ",entered_char)
-        data.append(entered_char)   
+        print("Enter C to continue or Q to stop.")
+        entered_char = com.check_data_qc()
 
         if entered_char == "q":
             End_Flag = False
 
-    print(data)
+        dealer = com.process_next_dealer(dealer, players_number)
+
 
 #戦績を精算
 def calculate_result():
