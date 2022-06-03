@@ -12,10 +12,10 @@ def main():
     sb_value = funcs.make_game_setting()
 
     #ポーカーの管理をする
-    funcs.manage_poker(name_data, sb_value)
+    cip_data = funcs.manage_poker(name_data, sb_value)
 
     #戦績を精算
-    # calculate_result()
+    funcs.calculate_result(cip_data, name_data)
 
     #結果を表示する
     # display_result()

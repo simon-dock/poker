@@ -16,6 +16,7 @@ def first_half(Fold_Flag, name_data, cip_data, cip_index, now_player, max_bet, p
         #入力受付、格納
         now_bet = com.check_data_what()
 
+    print(now_bet)
     cip_data[cip_index][com.cast_cip(now_player)] = now_bet
     
     return now_bet

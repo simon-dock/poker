@@ -38,10 +38,11 @@ def process_preflop(cip_data, cip_index, name_data, sb_value, players_number, de
     First_Flag = True
 
     #共通の処理
-    past_bet = 0
+    past_bet = com.sum_round_bet(PREFLOP, cip_data, cip_index, now_player)
     Redo_Flag = True
     Fold_Flag = False
     while(Redo_Flag):
+        print(cip_data)
         #前半の処理
         now_bet = com_process.first_half(Fold_Flag, name_data, cip_data, cip_index, now_player, max_bet, past_bet)
 

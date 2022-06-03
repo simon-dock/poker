@@ -122,9 +122,16 @@ def manage_poker(name_data, sb_value):
 
         dealer = com.process_next_dealer(dealer, players_number)
 
+    print("--------------------")
+    print("GAME OVER")
+
+    return cip_data
+
 
 #戦績を精算
-def calculate_result():
+def calculate_result(cip_data, name_data):
+    print(name_data)
+    print(cip_data)
     pass
 
 #結果を表示する
