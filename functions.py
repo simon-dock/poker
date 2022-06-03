@@ -88,7 +88,6 @@ def manage_poker(name_data, sb_value):
     End_Flag = True
     cip_data = np.zeros([1,com.cast_cip(players_number)], dtype=np.int32)
     fold_count = 0
-    data = []
     cip_index = 0
     while(End_Flag):
 
@@ -105,13 +104,19 @@ def manage_poker(name_data, sb_value):
             #ターン
             cip_data, cip_index = add_mana.process_turn(cip_data, cip_index, name_data, players_number, dealer, sb_player)
 
-
-        #リバー
-        #river()
-
-        #ショウダウン
-        #showdwon()
-
+        fold_count = com.count_fold(cip_data, cip_index, players_number)
+        if fold_count < players_number-1:
+            #リバー
+            cip_data, cip_index = add_mana.process_river(cip_data, cip_index, name_data, players_number, dealer, sb_player)
+            
+        fold_count = com.count_fold(cip_data, cip_index, players_number)
+        if fold_count < players_number-1:
+            #ショウダウン
+            cip_data, cip_index = add_mana.process_showdwon(cip_data, cip_index, name_data, players_number)
+        else:
+            #最後まで降りなかった人が勝つ処理
+            cip_data, cip_index = add_mana.process_survive(cip_data, cip_index, name_data, players_number)
+        
         entered_char = input()
         print("The character entered is ",entered_char)
         data.append(entered_char)   

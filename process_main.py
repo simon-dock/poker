@@ -27,6 +27,4 @@ def manage(raund_name, cip_data, cip_index, name_data, players_number, dealer, n
     #ラウンド最後の処理
     cip_data, cip_index = com_process.mark_fold(cip_data, cip_index, players_number, now_player)
 
-    print(cip_data)
-
     return cip_data, cip_index

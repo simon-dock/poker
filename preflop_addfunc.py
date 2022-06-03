@@ -20,8 +20,34 @@ def set_position(cip_data, cip_index, name_data, sb_value, players_number, deale
 
 
 #preflop独自の処理　誰もレイズせず、はじめてbbの番になった場合　レイズかチェックか選べる
-def check_bb_raise(First_Flag, Redo_Flag, bb_player, now_player):
+def check_bb_raise(First_Flag, Redo_Flag, cip_data, cip_index, players_number, bb_player, now_player):
+
     if bb_player == now_player and Redo_Flag == False and First_Flag == True:
         First_Flag = False
         Redo_Flag = True
+        Redo_Flag = check_survive(Redo_Flag, cip_data, cip_index, players_number, now_player)
+
     return First_Flag, Redo_Flag
+
+
+def check_survive(Redo_Flag, cip_data, cip_index, players_number, now_player):
+
+    fold_count = 0
+
+    while(1):
+        
+        now_player -= 1
+        if now_player == -1:
+            now_player = players_number
+            cip_index -= 1
+            
+        if cip_data[cip_index][com.cast_cip(now_player)] == -1:
+            fold_count += 1
+        else:
+            break
+
+        if fold_count == players_number-1:
+            Redo_Flag = False
+            break
+
+    return Redo_Flag
